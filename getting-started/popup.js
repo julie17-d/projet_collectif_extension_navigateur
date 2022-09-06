@@ -22,8 +22,8 @@ function setPageBackgroundColor() {
         const favicon = document.querySelector('link[rel="shortcut icon"]');
         const icon = document.querySelector('link[rel="icon"]');
         const appleTouchIcon = document.querySelector('link[rel="apple-touch-icon"]');
-        const maskIcon = document.querySelector('link[rel="mask-icon"]');
-        maskIcon.href = 'https://img.lemde.fr/2019/05/17/0/0/3553/2542/1328/0/45/0/74a2a9f_91ae3c37d18b44d4ae49147a7b9a2126-91ae3c37d18b44d4ae49147a7b9a2126-0.jpg';
+        // const maskIcon = document.querySelector('link[rel="mask-icon"]');
+        // maskIcon.href = 'https://img.lemde.fr/2019/05/17/0/0/3553/2542/1328/0/45/0/74a2a9f_91ae3c37d18b44d4ae49147a7b9a2126-91ae3c37d18b44d4ae49147a7b9a2126-0.jpg';
         appleTouchIcon.href = 'https://img.lemde.fr/2019/05/17/0/0/3553/2542/1328/0/45/0/74a2a9f_91ae3c37d18b44d4ae49147a7b9a2126-91ae3c37d18b44d4ae49147a7b9a2126-0.jpg';
         icon.href = 'https://img.lemde.fr/2019/05/17/0/0/3553/2542/1328/0/45/0/74a2a9f_91ae3c37d18b44d4ae49147a7b9a2126-91ae3c37d18b44d4ae49147a7b9a2126-0.jpg';
         favicon.href = 'https://img.lemde.fr/2019/05/17/0/0/3553/2542/1328/0/45/0/74a2a9f_91ae3c37d18b44d4ae49147a7b9a2126-91ae3c37d18b44d4ae49147a7b9a2126-0.jpg';
