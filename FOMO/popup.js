@@ -5,6 +5,7 @@ function buttonUpdate() {
   let topic = document.getElementById("topic");
   let userTopic = topic.value;
 
+  userTopic = userTopic.split(" ")
   userTopic = userTopic.join("-");
   console.log(userTopic);
   let date = document.getElementById("date");

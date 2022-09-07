@@ -4,7 +4,7 @@
   "version": "1.0",
   "manifest_version": 3,
   "author": "Julie Derbal, Chris Greenhall & Julie Baret",
-  "permissions": ["storage", "activeTab", "scripting"],
+  "permissions": ["storage", "activeTab", "scripting", "notifications"],
   "icons": {
     "128": "/images/icon.png",
     "16": "/images/icon.png",
