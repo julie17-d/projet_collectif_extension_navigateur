@@ -1,10 +1,14 @@
 let button = document.getElementById("button");
 button.addEventListener("click", buttonUpdate);
-button.addEventListener('keypress', function (e) {
-  if (e.key === 'Enter') {
-    buttonUpdate();
-  }
-});
+let inputTopic = document.getElementById("topic");
+inputTopic.addEventListener('keypress', function (e) {
+    if (inputTopic.value=="" && e.key ==="Enter"){
+      alert("You must choose a topic.")
+    }
+    else if (e.key === "Enter") {
+      buttonUpdate();
+    }
+  });
 
 
 let userTopic;
