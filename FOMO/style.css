@@ -43,6 +43,7 @@ body {
 html {
     background-color: whitesmoke;
     background-image: url("images/Fear\ of\ Missing\ Out.png") ;
+    height: 290px;
     /* background-size: cover; */
 }
 

@@ -1,5 +1,11 @@
 let button = document.getElementById("button");
 button.addEventListener("click", buttonUpdate);
+button.addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    buttonUpdate();
+  }
+});
+
 
 let userTopic;
 let url;
@@ -41,8 +47,8 @@ function buttonUpdate() {
   //let url = 'https://newsdata.io/api/1/news?apikey=pub_11024b51bab49e5c0e5be61de5f0eb348afdb&language=fr,en&q=' + 'Apple' + '&from=' + fullDate + '&apiKey=f36578cbd49a4d378930151f1e3ac0d6';
 
   url =
-    "https://newsdata.io/api/1/news?apikey=pub_1096463a00f38152b895f422ed9db51349ba9&language=fr,en&q=" +
-    userTopic;
+    "https://newsdata.io/api/1/news?apikey=pub_1096463a00f38152b895f422ed9db51349ba9&language=fr,en&qInTitle= " +
+    userTopic + " ";
 
   fetchArticles();
 }
@@ -51,7 +57,7 @@ function buttonUpdate() {
 async function fetchArticles() {
   const response = await fetch(url);
   const data = await response.json();
-  console.log(data.results[0].title);
+  //console.log(data.results[0].title);
   let title = data.results[0].title;
   let link = data.results[0].link;
   let pubDate = data.results[0].pubDate;
@@ -62,25 +68,25 @@ async function fetchArticles() {
   let epochDate = new Date(pubDate);
   epochDate = epochDate.getTime();
   console.log(pubDate);
-  console.log(epochDate);
+  console.log(typeof epochDate);
+
   //if statement if parameter(s) is unavailable
+  if (!description) {
+    description = "Click the link to discover more!";
+  }
+  if (!title) {
+    title = "News related to " + userTopic;
+  }
+
   if (!imageUrl) {
-    if (!description) {
-      createABasicNotif(title, "Click the link to discover more!", epochDate);
-    } else {
-      createABasicNotif(title, description, epochDate);
-    }
+    createABasicNotif(sourceId + " | " + title, description, epochDate);
   } else {
-    if (!description) {
-      createAnImageNotif(
-        title,
-        "Click the link to discover more!",
-        epochDate,
-        "/images/icon.png"
-      );
-    } else {
-      createAnImageNotif(title, description, epochDate, "/images/icon.png");
-    }
+    createAnImageNotif(sourceId + " | " + title, description, epochDate, "/images/icon.png");
   }
   readNow(link);
+}
+
+window.onunhandledrejection = (e) =>  {
+  console.log(e.reason);
+  alert("Sorry, your taste is too particular... Please choose another topic.")
 }
