@@ -28,7 +28,7 @@ function createABasicNotif(title, description, date) {
       },
       {
         title: "Save for later",
-      }
+      },
     ],
     eventTime: date,
   });

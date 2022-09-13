@@ -1,18 +1,18 @@
 let button = document.getElementById("button");
 button.addEventListener("click", buttonUpdate);
 let inputTopic = document.getElementById("topic");
-inputTopic.addEventListener("keypress", function (e) {
+inputTopic.addEventListener("keypress", async function (e) {
   if (inputTopic.value == "" && e.key === "Enter") {
     alert("You must choose a topic.");
   } else if (e.key === "Enter") {
-    buttonUpdate();
+    await buttonUpdate();
   }
 });
 
 let userTopic;
 let url;
 
-function buttonUpdate() {
+async function buttonUpdate() {
   //store the data related to topic
   let topic = document.getElementById("topic");
   userTopic = topic.value;
@@ -53,24 +53,37 @@ function buttonUpdate() {
     userTopic +
     " ";
 
-  fetchArticles(0);
-  setInterval(fetchArticles, 1800000, 0);
-  // for (let i = 0; i < 3; i++) {
-  //   fetchArticles(i);
-  // }
+  //fetchArticles(0);
+  let articles = await fetchArticles();
+  displayOneByOne(articles, 0, 3);
 }
 
-//get latest article from API about user-chosen topic
-async function fetchArticles(num) {
+function displayOneByOne(list, next, max) {
+  if (next > max) {
+    return;
+  } else {
+    displayArticles(list, next);
+  }
+  setTimeout(() => {
+    displayOneByOne(list, next + 1, max);
+  }, 3000);
+}
+
+async function fetchArticles() {
   const response = await fetch(url);
   const data = await response.json();
+  console.log(data);
+  return data.results;
+}
+//get latest article from API about user-chosen topic
+async function displayArticles(list, num) {
   //console.log(data.results[0].title);
-  let title = data.results[num].title;
-  let link = data.results[num].link;
-  let pubDate = data.results[num].pubDate;
-  let imageUrl = data.results[num].image_url;
-  let description = data.results[num].description;
-  let sourceId = data.results[num].source_id;
+  let title = list[num].title;
+  let link = list[num].link;
+  let pubDate = list[num].pubDate;
+  let imageUrl = list[num].image_url;
+  let description = list[num].description;
+  let sourceId = list[num].source_id;
   console.log(imageUrl);
   let epochDate = new Date(pubDate);
   epochDate = epochDate.getTime();
@@ -102,3 +115,7 @@ window.onunhandledrejection = (e) => {
   console.log(e.reason);
   alert("Sorry, your taste is too particular... Please choose another topic.");
 };
+
+// function sleep(ms) {
+//   return new Promise((resolve) => setTimeout(resolve, ms));
+// }
