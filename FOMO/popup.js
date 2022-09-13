@@ -1,14 +1,13 @@
 let button = document.getElementById("button");
 button.addEventListener("click", buttonUpdate);
 let inputTopic = document.getElementById("topic");
-inputTopic.addEventListener('keypress', function (e) {
-    if (inputTopic.value=="" && e.key ==="Enter"){
-      alert("You must choose a topic.")
-    }
-    else if (e.key === "Enter") {
-      buttonUpdate();
-    }
-  });
+inputTopic.addEventListener("keypress", async function (e) {
+  if (inputTopic.value == "" && e.key === "Enter") {
+    alert("You must choose a topic.");
+  } else if (e.key === "Enter") {
+    await buttonUpdate();
+  }
+});
 
 //test pour accéder à la sélection utilisateur
 let userSelection = window.getSelection();
@@ -19,7 +18,7 @@ console.log(urlOpen);
 let userTopic;
 let url;
 
-function buttonUpdate() {
+async function buttonUpdate() {
   //store the data related to topic
   let topic = document.getElementById("topic");
   userTopic = topic.value;
@@ -57,22 +56,40 @@ function buttonUpdate() {
 
   url =
     "https://newsdata.io/api/1/news?apikey=pub_1096463a00f38152b895f422ed9db51349ba9&language=fr,en&qInTitle= " +
-    userTopic + " ";
+    userTopic +
+    " ";
 
-  fetchArticles();
+  //fetchArticles(0);
+  let articles = await fetchArticles();
+  displayOneByOne(articles, 0, 3);
 }
 
-//get latest article from API about user-chosen topic
+function displayOneByOne(list, next, max) {
+  if (next > max) {
+    return;
+  } else {
+    displayArticles(list, next);
+  }
+  setTimeout(() => {
+    displayOneByOne(list, next + 1, max);
+  }, 3000);
+}
+
 async function fetchArticles() {
   const response = await fetch(url);
   const data = await response.json();
+  console.log(data);
+  return data.results;
+}
+//get latest article from API about user-chosen topic
+async function displayArticles(list, num) {
   //console.log(data.results[0].title);
-  let title = data.results[0].title;
-  let link = data.results[0].link;
-  let pubDate = data.results[0].pubDate;
-  let imageUrl = data.results[0].image_url;
-  let description = data.results[0].description;
-  let sourceId = data.results[0].source_id;
+  let title = list[num].title;
+  let link = list[num].link;
+  let pubDate = list[num].pubDate;
+  let imageUrl = list[num].image_url;
+  let description = list[num].description;
+  let sourceId = list[num].source_id;
   console.log(imageUrl);
   let epochDate = new Date(pubDate);
   epochDate = epochDate.getTime();
@@ -90,12 +107,21 @@ async function fetchArticles() {
   if (!imageUrl) {
     createABasicNotif(sourceId + " | " + title, description, epochDate);
   } else {
-    createAnImageNotif(sourceId + " | " + title, description, epochDate, "/images/icon.png");
+    createAnImageNotif(
+      sourceId + " | " + title,
+      description,
+      epochDate,
+      "/images/icon.png"
+    );
   }
   readNow(link);
 }
 
-window.onunhandledrejection = (e) =>  {
+window.onunhandledrejection = (e) => {
   console.log(e.reason);
-  alert("Sorry, your taste is too particular... Please choose another topic.")
-}
+  alert("Sorry, your taste is too particular... Please choose another topic.");
+};
+
+// function sleep(ms) {
+//   return new Promise((resolve) => setTimeout(resolve, ms));
+// }
