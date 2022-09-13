@@ -10,6 +10,11 @@ inputTopic.addEventListener('keypress', function (e) {
     }
   });
 
+//test pour accéder à la sélection utilisateur
+let userSelection = window.getSelection();
+console.log(userSelection);
+let urlOpen = chrome.tabs.query(url);
+console.log(urlOpen);
 
 let userTopic;
 let url;
