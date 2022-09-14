@@ -1,5 +1,12 @@
 let button = document.getElementById("button");
-button.addEventListener("click", buttonUpdate);
+button.addEventListener("click", async function(){
+  if (inputTopic.value == ""){
+    alert("You must choose a topic.");   
+  } else {
+    await buttonUpdate();
+  }
+});
+
 let inputTopic = document.getElementById("topic");
 inputTopic.addEventListener("keypress", async function (e) {
   if (inputTopic.value == "" && e.key === "Enter") {
@@ -8,12 +15,6 @@ inputTopic.addEventListener("keypress", async function (e) {
     await buttonUpdate();
   }
 });
-
-//test pour accéder à la sélection utilisateur
-let userSelection = window.getSelection();
-console.log(userSelection);
-let urlOpen = chrome.tabs.query(url);
-console.log(urlOpen);
 
 let userTopic;
 let url;
