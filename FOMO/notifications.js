@@ -1,37 +1,16 @@
-function createAnImageNotif(title, description, date, imageUrl) {
-  chrome.notifications.create("01", {
-    type: "image",
-    iconUrl: "/images/icon.png",
-    imageUrl: imageUrl,
-    title: title,
-    message: description,
-    priority: 2,
-    buttons: [
-      {
-        title: "read now",
-      },
-    ],
-    eventTime: date,
-  });
-}
-
-function createABasicNotif(title, description, date) {
+function createABasicNotif(title, description, date, link, source) {
   chrome.notifications.create("01", {
     type: "basic",
     iconUrl: "/images/icon.png",
     title: title,
-    message: description,
+    message: source + ": " + date + " | " + description,
     priority: 2,
     buttons: [
       {
         title: "Read now",
-      },
-      {
-        title: "Save for later",
-      },
-    ],
-    eventTime: date,
+      }],
   });
+  readNow(link);
 }
 
 function readNow(link) {
@@ -39,3 +18,20 @@ function readNow(link) {
     chrome.tabs.create({ url: link });
   });
 }
+
+// function createAnImageNotif(title, description, date, imageUrl) {
+//   chrome.notifications.create("01", {
+//     type: "image",
+//     iconUrl: "/images/icon.png",
+//     imageUrl: imageUrl,
+//     title: title,
+//     message: description,
+//     priority: 2,
+//     buttons: [
+//       {
+//         title: "read now",
+//       },
+//     ],
+//     eventTime: date,
+//   });
+// }

@@ -1,10 +1,10 @@
 {
   "name": "FOMO - Fear Of Missing Out",
-  "description": "Receive news update on your favorite subjects. Choose a topic or highlight one on your browser and do not miss a single related article.",
+  "description": "Receive news update on your favorite subjects. Choose a topic on your browser and get the last related article.",
   "version": "1.0",
   "manifest_version": 3,
   "author": "Julie Derbal, Chris Greenhall & Julie Baret",
-  "permissions": ["storage", "activeTab", "scripting", "notifications"],
+  "permissions": ["notifications"],
   "icons": {
     "128": "/images/icon.png",
     "16": "/images/icon.png",
