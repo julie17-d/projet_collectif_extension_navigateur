@@ -4,7 +4,7 @@ Browser extension school project by Chris, Julie B., Julie D.
 
 ## FOMO: Don't Miss Important Infos on your Favorite Subjects!
 
- 	![FOMO extension pop-up](https://user-images.githubusercontent.com/97305602/203768890-867a85cf-40ad-4c90-b168-7e3790babdda.png)
+[FOMO extension pop-up](https://user-images.githubusercontent.com/97305602/203768890-867a85cf-40ad-4c90-b168-7e3790babdda.png)
 
 Enter a subject and get notifications with the latest news articles about it!
 
